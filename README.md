@@ -13,13 +13,21 @@ SoulBound ERC20 - Bounty on EthernautDAO
 
 ### Test it
 - clone this repo 
--- git clone git@github.com:SolDev-HP/SoulBound-ERC20.git
+```
+git clone git@github.com:SolDev-HP/SoulBound-ERC20.git
+```
 - Setup your python virtual environement (Don't want those deps spilling over to others)
--- python -m venv .venv
+```
+python -m venv .venv
+```
 - Activate your virtual environment
--- python ./.venv/scripts/activate 
+```
+python ./.venv/scripts/activate 
+```
 - Install dependencies 
--- pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 - Prepare environment variables, interact.py uses dotenv to load enviroment variables written within .env file 
 -- Create .env file and add following 
 ```
@@ -38,12 +46,14 @@ INFURA_SECRET = ""
 
 -- .env file will be used in interact.py, we load those accounts using private keys (I've used ganache-cli for local development)
 - Compile contracts using brownie (Compiles all the contracts present in /contract folder)
--- brownie compile 
+```
+brownie compile 
+```
 - Run interact.py script
--- This script deploys EXP contract using Admin1 
--- Admin1 adds another admin called Admin2
--- Admin1 Mints EXP tokens to Admin1
--- Admin2 Mints EXP tokens to Admin2 
--- Casually checks whether buyer1/buyer2 can call restricted functions like setApprovedMinter()
--- Admins mint a few tokens for buyer1/buyer2 
--- Script further demonstrates that both buyers can't transfer the token, not even admin can transfer the token (SoulBound - Once minted and assigned, can't be transfered/moved)
+  - This script deploys EXP contract using Admin1 
+  - Admin1 adds another admin called Admin2
+  - Admin1 Mints EXP tokens to Admin1
+  - Admin2 Mints EXP tokens to Admin2 
+  - Casually checks whether buyer1/buyer2 can call restricted functions like setApprovedMinter()
+  - Admins mint a few tokens for buyer1/buyer2 
+  - Script further demonstrates that both buyers can't transfer the token, not even admin can transfer the token (SoulBound - Once minted and assigned, can't be transfered/moved)
