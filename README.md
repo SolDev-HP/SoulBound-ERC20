@@ -83,7 +83,8 @@ This script performs following steps:
 5. Admin2 mints some EXP to user2
 6. Verify users can't perform admin actions 
 7. Verify soulbound functionality 
-8. Requests random number, (make sure before this happens, you top up sponsor wallet - It will be fullfilling all the requests from now on. something like 0.005 should be fine.)
+8. Requests random number, (make sure before this happens, you top up sponsor wallet 
+- It will be fullfilling all the requests from now on. something like 0.005rEth should be fine.)
 
 ### Current Status + Deployment on rinkeby 
 
@@ -132,7 +133,9 @@ Transaction sent: 0x3a56751ff07cb06b8f58a7d5c517ed36077b41db9e858f93006aa0edd13c
 // is set to true on airnoderrp
 
 Address     0xa0ad79d995ddeeb18a14eaef56a549a04e3aa1bd
-Name        SetSponsorshipStatus (index_topic_1 address sponsor, index_topic_2 address requester, bool sponsorshipStatus)View Source
+Name        SetSponsorshipStatus (index_topic_1 address sponsor, 
+            index_topic_2 address requester, bool sponsorshipStatus)
+            View Source
 
 Topics
 0 0xc2e532a12bbcce2bfa2ef9e4bee80180e4e1b1f78618f0d20bc49a648b577c56
@@ -195,7 +198,11 @@ Transaction sent: 0xa05e8527535d726ef8d7cd1635e6071fc7bf999e6e2c921a0979ca7e6e41
 // Following above transaction on etherscan 
 
 Address     0xa0ad79d995ddeeb18a14eaef56a549a04e3aa1bd
-Name        MadeFullRequest (index_topic_1 address airnode, index_topic_2 bytes32 requestId, uint256 requesterRequestCount, uint256 chainId, address requester, bytes32 endpointId, address sponsor, address sponsorWallet, address fulfillAddress, bytes4 fulfillFunctionId, bytes parameters)View Source
+Name        MadeFullRequest (index_topic_1 address airnode, index_topic_2 bytes32 requestId, 
+            uint256 requesterRequestCount, uint256 chainId, address requester, bytes32 endpointId, 
+            address sponsor, address sponsorWallet, 
+            address fulfillAddress, bytes4 fulfillFunctionId, bytes parameters)
+            View Source
 
 Topics
 0 0x3a52c462346de2e9436a3868970892956828a11b9c43da1ed43740b12e1125ae
@@ -277,7 +284,13 @@ Brownie environment is ready.
     '0xfd2413f8': "mTokenAdmins"
 }
 >>> dir(expcon)
-[aApiProviderAirnode, aSponsorWallet, abi, address, airnodeRrp, alias, allowance, approve, balance, balanceOf, btEndpointIdUint256, bytecode, decimals, decode_input, decreaseAllowance, from_abi, from_ethpm, from_explorer, fulfillRandomNumberRequest, gainExperience, get_method, get_method_object, increaseAllowance, info, mTokenAdmins, name, owner, randomNumber, renounceOwnership, requestRandomEXPerienceForPlayer, selectors, setRequestParameters, setTokenAdmin, set_alias, signatures, symbol, topics, totalSupply, transfer, transferFrom, transferOwnership, tx]
+[aApiProviderAirnode, aSponsorWallet, abi, address, airnodeRrp, alias, allowance, 
+approve, balance, balanceOf, btEndpointIdUint256, bytecode, decimals, decode_input, 
+decreaseAllowance, from_abi, from_ethpm, from_explorer, fulfillRandomNumberRequest, 
+gainExperience, get_method, get_method_object, increaseAllowance, info, mTokenAdmins, 
+name, owner, randomNumber, renounceOwnership, requestRandomEXPerienceForPlayer, selectors,
+setRequestParameters, setTokenAdmin, set_alias, signatures, symbol, topics, totalSupply, 
+transfer, transferFrom, transferOwnership, tx]
 
 >>> accounts.add('****')
 <LocalAccount '0xBcE03a4B33337E4776d845909C041CAAD4799790'>
