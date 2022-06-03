@@ -72,6 +72,9 @@ contract EXPToken is ERC20, Ownable, ISoulbound, QRNGRequester {
         mTokenAdmins[_msgSender()] = true;
         // We don't need anything else except for setting up following things here
         // IERC165, supportsInterface - IERC20, ISoulbound 
+        // For minting when we receive QRNG, we can set airnoderrp as token admin 
+        // so that it can mint too, but how feasible is this? better way?
+        mTokenAdmins[aRrpAirnode] = true;
     }
 
 
@@ -173,5 +176,32 @@ contract EXPToken is ERC20, Ownable, ISoulbound, QRNGRequester {
     //     // Burn given amount from user's balance 
     //     _burn(looser_, lostAmount_);
     // }
+
+    // Do we even need to set _sposorWallet as token admin so that we can mint
+    // when we receive our random number request fulfillment 
+    // Testing to see if we can actually pull this off by overriding base class 
+    // method, assigning new modifier, and then calling the base class method 
+    // once that returns success, we can then mint expected amount of tokens 
+    function fulfillRandomNumberRequest(bytes32 _requestId, bytes calldata data) external override onlyAirnodeRrp {
+        // A callback function only accessible by AirnodeRrp
+        // Check if we are acutally expecting a request to be fulfilled 
+        require (
+            mExpectingRequestWithIdToBeFulfilled[_requestId],
+            "Unknown request ID");
+        
+        // Set the expectations back low
+        mExpectingRequestWithIdToBeFulfilled[_requestId] = false;
+        // once that is done, we can call mint? 
+        uint256 qrngUint256 = abi.decode(data, (uint256));
+        // Emit the event stating we received the random number 
+        emit RandomNumberReceived(_requestId, qrngUint256); 
+        // Need qrng between 0.01 and 0.99
+        // Received -> %100 -> (0 - 99) -> /100 -> is the result EXP tokens 
+        // doubtful idea :'D
+        gainExperience(mRequestIdToWhoRequested[_requestId], ((qrngUint256 % 100) * 10 ** 16));
+
+        // If we reach here, noooiiiccee!!!
+
+    }
 
 }

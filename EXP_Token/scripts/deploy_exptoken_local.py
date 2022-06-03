@@ -47,3 +47,9 @@ def main():
         expContract.approve(os.getenv("DEV_HODLER1_PUB"), 1 * 10 ** 18, {"from": dev_hodler1}) #should fail
     except BaseException as err:
         Logs.logExceptionMakeReadable(err)
+
+    # Trying QRNG predictable replies locally
+    try:
+        expContract.requestRandomEXPerienceForPlayer(os.getenv("DEV_HODLER2_PUB"), {"from": dev_deployer})
+    except BaseException as err:
+        Logs.logExceptionMakeReadable(err)

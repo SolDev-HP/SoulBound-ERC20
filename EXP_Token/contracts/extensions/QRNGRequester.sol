@@ -17,8 +17,6 @@ contract QRNGRequester is RrpRequesterV0, Ownable {
      *                          STATE VARIABLES
      * ==================================================================
      */
-    // To test received random number from Airnode
-    uint256 public randomNumber;
     // Now we need storage for parameters 
     // airnode - this is the location of Airnode that has implemented Airnode Rrp
     // endpointIdUnit256 - A path on airnode, that will provide us the random result.
@@ -107,22 +105,12 @@ contract QRNGRequester is RrpRequesterV0, Ownable {
     // To generate random uint, we will use the function already implemented within that contract 
     // However, the callback function is listed here because we want to use 
     // the received results 
-    function fulfillRandomNumberRequest(bytes32 _requestId, bytes calldata data) external onlyAirnodeRrp {
-        // A callback function only accessible by AirnodeRrp
-        // Check if we are acutally expecting a request to be fulfilled 
-        require (
-            mExpectingRequestWithIdToBeFulfilled[_requestId],
-            "Unknown request ID");
-        
-        // Set the expectations back low
-        mExpectingRequestWithIdToBeFulfilled[_requestId] = false;
-        // Now on to the number that we received 
-        uint256 qrngUint256 = abi.decode(data, (uint256));
-        // Can we limit it to be within 100? But instead, we will first see 
-        // what range it sends back 
-        randomNumber = qrngUint256;
-        // Emit the event stating we received the random number 
-        emit RandomNumberReceived(_requestId, qrngUint256); 
+    function fulfillRandomNumberRequest(bytes32 _requestId, bytes calldata data) external virtual onlyAirnodeRrp {
+        // So we can add this into derived contract 
+        // Keeeeep empty for a reason. when requesting, we also send function signature of this function
+        // Though it is overridden in exp token contract, it makes sense to have the function signature here so 
+        // that selector can select, and eventually exp token's version of this function gets executed when fulfillment 
+        // occurs.
     } 
 
 }
