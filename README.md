@@ -56,7 +56,7 @@ DEV_HODLER2_PRIV = ""
 - We are using OpenZeppelin and API3 packages within brownie, hence once inside the token directory, install brownie packages using following commands 
 ```
 brownie pm install OpenZeppelin/openzeppelin-contracts@4.6.0
-brownie pm install brownie pm install api3dao/airnode@0.6.3
+brownie pm install api3dao/airnode@0.6.3
 ```
 - (note) all brownie does is, looks onto github by following pattern to find requested package version from repo
 ```
